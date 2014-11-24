@@ -57,69 +57,99 @@
   (define column3 (new vertical-pane% [parent button-area]))
   (define column4 (new vertical-pane% [parent button-area]))
   (define button-m+ (new button% [parent column1] [label "M+"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-m+]))
   (define button-m- (new button% [parent column2] [label "M-"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-m-]))
   (define button-mc (new button% [parent column3] [label "MC"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-mc]))
   (define button-mr (new button% [parent column4] [label "MR"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-mr]))
   (define button-<- (new button% [parent column1] [label "<-"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-<-]))
   ;(define spacer (new pane% [parent column2]))
   (define spacer (new button%    [parent column2] [label ""] [enabled #f]
                                  [stretchable-width #t] [stretchable-height #t]))
   (send spacer show #f)
   (define button-ce (new button% [parent column3] [label "CE"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-ce]))
   (define button-ac (new button% [parent column4] [label "AC"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-ac]))
   (define button-lp (new button% [parent column1] [label "("]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-lp]))
   (define button-rp (new button% [parent column2] [label ")"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-rp]))
   (define button-rc (new button% [parent column3] [label "1/x"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-rc]))
   (define button-% (new button%  [parent column4] [label "%"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-%]))
   (define button-+- (new button% [parent column1] [label "+-"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-+-]))
   (define button-sq (new button% [parent column2] [label "^2"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-sq]))
   (define button-sr (new button% [parent column3] [label "sqrt"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-sr]))
   (define button-fn (new button% [parent column4] [label "f()"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-fn]))
   (define button-7 (new button%  [parent column1] [label "7"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-7]))
   (define button-8 (new button%  [parent column2] [label "8"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-8]))
   (define button-9 (new button%  [parent column3] [label "9"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-9]))
   (define button-/ (new button%  [parent column4] [label "/"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-/]))
   (define button-4 (new button%  [parent column1] [label "4"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-4]))
   (define button-5 (new button%  [parent column2] [label "5"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-5]))
   (define button-6 (new button%  [parent column3] [label "6"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-6]))
   (define button-* (new button%  [parent column4] [label "*"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-*]))
   (define button-1 (new button%  [parent column1] [label "1"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-1]))
   (define button-2 (new button%  [parent column2] [label "2"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-2]))
   (define button-3 (new button%  [parent column3] [label "3"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-3]))
   (define button-- (new button%  [parent column4] [label "-"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button--]))
   (define button-0 (new button%  [parent column1] [label "0"]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-0]))
   (define button-pt (new button% [parent column2] [label "."]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-pt]))
   (define button-= (new button%  [parent column3] [label "="]
-                                 [stretchable-width #t] [stretchable-height #t]))
+                                 [stretchable-width #t] [stretchable-height #t]
+                                 [callback on-button-=]))
   (define button-+ (new button%  [parent column4] [label "+"]
                                  [stretchable-width #t] [stretchable-height #t]
                                  [callback on-button-+]))

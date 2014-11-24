@@ -6,6 +6,7 @@
 #lang racket/base
 (require racket/match
          racket/class
+         racket/pretty
          data/queue)
 
 ;(provide (all-defined-out))
@@ -22,13 +23,14 @@
 
     ;; Calculator operations
     (define/public (put signal)
-      (match `(,(get-state) ,signal)
-        [`(,st +) (set-pending! 'plus)]
-        [`(,st -) (set-pending! 'minus)]
-        [`(,st *) (set-pending! 'mult)]
-        [`(,st /) (set-pending! 'div)]
-        [`(,st =) (calc)]
-        [`(,st (enter ,x)) (enqueue! q x)]))
+      (pretty-print signal))
+      ;(match `(,(get-state) ,signal)
+        ;[`(,st +) (set-pending! 'plus)]
+        ;[`(,st -) (set-pending! 'minus)]
+        ;[`(,st *) (set-pending! 'mult)]
+        ;[`(,st /) (set-pending! 'div)]
+        ;[`(,st =) (calc)]
+        ;[`(,st (enter ,x)) (enqueue! q x)]))
 
     (define/private (get-state)
       (let ((st (car state)))
