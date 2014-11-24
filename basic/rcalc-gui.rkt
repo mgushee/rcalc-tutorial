@@ -10,7 +10,8 @@
   (define mainwin (new calc-frame% [label "Racket Calculator | Basic"]))
   (define num-display (new text-field% [parent mainwin]
                                        [label ""]
-                                       [init-value "0"]))
+                                       [init-value "0"]
+                                       [enabled #f]))
   (define (right-align w)
     (let ((ed (send num-display get-editor)))
       (send ed set-max-width (- w 16))
