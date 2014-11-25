@@ -1,0 +1,26 @@
+(finite-state-machine
+  states
+  (init
+    (foo (-> foo))
+    (_ (error "NO!") #f))
+  (foo
+    (bar ((-> bar)))
+    (baz ((-> baz)))
+    (undo (<-) #f)
+    (c    (print c) #f))
+
+... expands to ...
+
+(lambda (signal)
+  (let ((current-state (car states)))
+    (case current-state
+      ((init)
+        (case signal
+          ((foo) (perform-state-transitions states '(-> foo)))
+          (else (error "NO!"))))
+      ((foo)
+        (case signal
+          ((bar) (perform-state-transitions states '(-> bar)))
+          ((baz) (perform-state-transitions states '(-> baz)))
+          ((undo) (perform-state-transitions states '(<-)))
+          ((c) (print c)))))))
