@@ -5,67 +5,36 @@
 
 #lang racket/base
 (require racket/match
-         racket/class
          racket/pretty
-         data/queue)
+         data/queue
+         srfi/14)
 
-;(provide (all-defined-out))
-(provide rcengine%)
+(provide mk-engine)
 
-(define rcengine%
-  (class object%
-
-    (super-new)
-
-    (field [q (make-queue)])
-    (field [state '(initial)])
-    (field [pending-op #f])
-
-    ;; Calculator operations
-    (define/public (put signal)
-      (pretty-print signal))
-      ;(match `(,(get-state) ,signal)
-        ;[`(,st +) (set-pending! 'plus)]
-        ;[`(,st -) (set-pending! 'minus)]
-        ;[`(,st *) (set-pending! 'mult)]
-        ;[`(,st /) (set-pending! 'div)]
-        ;[`(,st =) (calc)]
-        ;[`(,st (enter ,x)) (enqueue! q x)]))
-
-    (define/private (get-state)
-      (let ((st (car state)))
-        (unless (eqv? st 'initial)
-          (set! state (cdr state)))
-        st))
-
-    (define/private (set-pending! signal)
-      (unless (memv signal '(plus minus mult div))
-        (error (format "Invalid operator: ~a\n" signal)))
-      (set! pending-op signal))
-
-    (define/private (calc)
-      (define op
-        (case pending-op
-          ((plus) +)
-          ((minus) -)
-          ((mult) *)
-          ((div) /)
-          (else #f)))
-      (if op
-        (let ((result (apply op (queue->list q))))
-          (set! q (make-queue))
-          result)
-        (dequeue! q)))))
-
-
-
-
-;;; IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-;;; ------------------------------------------------------------------------
-
-;;; OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-;;; ========================================================================
-;;; ------------------------------------------------------------------------
-
-
+(define (mk-engine)
+  (define pending-op +)
+  (define total 0)
+  (define digits '())
+  (define (digits->num)
+    (let ((n (string->number (list->string (reverse digits)))))
+      (set! digits '())
+      n))
+  (define (calc)
+    (set! total (eval `(,pending-op ,total ,(digits->num))))
+    (set! pending-op #f))
+  (λ (input)
+     (cond
+       ((and (char? input)
+             (char-set-contains? char-set:digit input))
+        (set! digits (cons input digits))
+        'ok)
+       ;; Hmm ... why would this happen?
+       ((and (procedure? input)
+             (null? digits))
+        'ok)
+       ((procedure? input)
+        (calc)
+        (set! pending-op input)
+        `(result ,total))
+       (else
+         'error))))
